@@ -19,7 +19,23 @@ export default class Music {
     this.boomAudio = new Audio()
     this.boomAudio.src = 'audio/boom.mp3'
 
-    this.playBgm()
+    this.muyuAudio = new Audio()
+    this.muyuAudio = 'music/muyu.mp3'
+
+    this.fzAudio = new Audio()
+    this.fzAudio = 'music/fz.wav'
+
+    // this.playBgm()
+  }
+
+  playMuyu(){
+    this.muyuAudio.currentTime = 0
+    this.muyuAudio.play()
+  }
+
+  playFz(){
+    this.fzAudio.currentTime = 0
+    this.fzAudio.play()
   }
 
   playBgm() {
