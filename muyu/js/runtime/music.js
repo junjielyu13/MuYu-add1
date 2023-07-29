@@ -19,6 +19,8 @@ export default class Music {
     this.boomAudio = new Audio()
     this.boomAudio.src = 'audio/boom.mp3'
 
+    // -----------------------------------
+
     this.muyuAudio = new Audio()
     this.muyuAudio = 'music/muyu.mp3'
 
@@ -37,6 +39,9 @@ export default class Music {
     this.fzAudio.currentTime = 0
     this.fzAudio.play()
   }
+
+  // -----------------------------------
+
 
   playBgm() {
     this.bgmAudio.play()

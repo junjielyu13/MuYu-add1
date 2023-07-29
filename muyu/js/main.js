@@ -4,6 +4,7 @@ import BackGround from './runtime/background'
 import GameInfo from './runtime/gameinfo'
 import Music from './runtime/music'
 import DataBus from './databus'
+import Muyu from './player/muyu'
 
 const ctx = canvas.getContext('2d')
 const databus = new DataBus()
@@ -27,7 +28,10 @@ export default class Main {
       this.touchHandler
     )
 
+    
     this.bg = new BackGround(ctx)
+
+    //this.muyu = new MUYU(ctx);
     this.player = new Player(ctx)
     this.gameinfo = new GameInfo()
     this.music = new Music()
@@ -143,7 +147,6 @@ export default class Main {
   update() {
     if (databus.gameOver) return
 
-    this.bg.update()
 
     databus.bullets
       .concat(databus.enemys)
