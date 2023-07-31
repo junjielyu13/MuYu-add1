@@ -6,15 +6,15 @@ const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
 
 // 玩家相关常量设置
-const MUYU_IMG_SRC = 'img/muyu_ps.png'
-const PLAYER_WIDTH = 80
-const PLAYER_HEIGHT = 80
+const PLAYER_IMG_SRC = 'img/muyu_ps.png'
+const PLAYER_WIDTH = 125
+const PLAYER_HEIGHT = 125
 
 const databus = new DataBus()
 
 export default class Muyu extends Sprite {
   constructor() {
-    super(MUYU_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
+    super(PLAYER_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
 
     // 玩家默认处于屏幕底部居中位置
     this.x = screenWidth / 2 - this.width / 2
@@ -73,6 +73,8 @@ export default class Muyu extends Sprite {
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
       e.preventDefault()
+
+      
 
       const x = e.touches[0].clientX
       const y = e.touches[0].clientY

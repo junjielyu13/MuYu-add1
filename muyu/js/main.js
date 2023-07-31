@@ -5,6 +5,7 @@ import GameInfo from './runtime/gameinfo'
 import Music from './runtime/music'
 import DataBus from './databus'
 import Muyu from './player/muyu'
+import Fz from './player/fz'
 
 const ctx = canvas.getContext('2d')
 const databus = new DataBus()
@@ -32,7 +33,9 @@ export default class Main {
     this.bg = new BackGround(ctx)
 
     //this.muyu = new MUYU(ctx);
-    this.player = new Player(ctx)
+    //this.player = new Player(ctx)
+    this.muyu = new Muyu(ctx)
+    //this.fz = new Fz(ctx)
     this.gameinfo = new GameInfo()
     this.music = new Music()
 
@@ -83,7 +86,7 @@ export default class Main {
     for (let i = 0, il = databus.enemys.length; i < il; i++) {
       const enemy = databus.enemys[i]
 
-      if (this.player.isCollideWith(enemy)) {
+      if (this.muyu.isCollideWith(enemy)) {
         databus.gameOver = true
 
         break
@@ -121,7 +124,8 @@ export default class Main {
         item.drawToCanvas(ctx)
       })
 
-    this.player.drawToCanvas(ctx)
+    this.muyu.drawToCanvas(ctx)
+    //this.fz.drawToCanvas(ctx)
 
     databus.animations.forEach((ani) => {
       if (ani.isPlaying) {
@@ -154,12 +158,12 @@ export default class Main {
         item.update()
       })
 
-    this.enemyGenerate()
+    // this.enemyGenerate()
 
-    this.collisionDetection()
+    // this.collisionDetection()
 
     if (databus.frame % 20 === 0) {
-      this.player.shoot()
+      // this.muyu.shoot()
       this.music.playShoot()
     }
   }
