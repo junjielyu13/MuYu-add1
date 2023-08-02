@@ -29,14 +29,7 @@ export default class Muyu extends Sprite {
     this.initEvent()
   }
 
-  /**
-   * 当手指触摸屏幕的时候
-   * 判断手指是否在飞机上
-   * @param {Number} x: 手指的X轴坐标
-   * @param {Number} y: 手指的Y轴坐标
-   * @return {Boolean}: 用于标识手指是否在飞机上的布尔值
-   */
-  checkIsFingerOnAir(x, y) {
+  checkIsFingerOnMuyu(x, y) {
     const deviation = 30
 
     return !!(x >= this.x - deviation
@@ -45,61 +38,28 @@ export default class Muyu extends Sprite {
               && y <= this.y + this.height + deviation)
   }
 
-  /**
-   * 根据手指的位置设置飞机的位置
-   * 保证手指处于飞机中间
-   * 同时限定飞机的活动范围限制在屏幕中
-   */
-  setAirPosAcrossFingerPosZ(x, y) {
-    let disX = x - this.width / 2
-    let disY = y - this.height / 2
-
-    if (disX < 0) disX = 0
-
-    else if (disX > screenWidth - this.width) disX = screenWidth - this.width
-
-    if (disY <= 0) disY = 0
-
-    else if (disY > screenHeight - this.height) disY = screenHeight - this.height
-
-    this.x = disX
-    this.y = disY
-  }
-
-  /**
-   * 玩家响应手指的触摸事件
-   * 改变战机的位置
-   */
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
       e.preventDefault()
-
       
-
       const x = e.touches[0].clientX
       const y = e.touches[0].clientY
-
-      //
-      if (this.checkIsFingerOnAir(x, y)) {
-        this.touched = true
-
-        this.setAirPosAcrossFingerPosZ(x, y)
+      if (this.checkIsFingerOnMuyu(x, y)) {
+        this.touched = true;
+        this.width = 150;
+        this.height = 150;
       }
     }))
 
     canvas.addEventListener('touchmove', ((e) => {
       e.preventDefault()
-
-      const x = e.touches[0].clientX
-      const y = e.touches[0].clientY
-
-      if (this.touched) this.setAirPosAcrossFingerPosZ(x, y)
     }))
 
     canvas.addEventListener('touchend', ((e) => {
       e.preventDefault()
-
-      this.touched = false
+      this.touched = false;
+      this.width = 125;
+      this.height = 125;
     }))
   }
 
