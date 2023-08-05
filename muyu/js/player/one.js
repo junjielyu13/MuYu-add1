@@ -11,7 +11,7 @@ const __ = {
 
 const databus = new DataBus()
 
-export default class Ones extends Sprite {
+export default class One extends Sprite {
   constructor() {
     super("", ONES_WIDTH, ONES_HEIGHT)
   }
@@ -27,7 +27,9 @@ export default class Ones extends Sprite {
 
 
   drawToCanvas(ctx){
-
+    if (!this.visible) return
+    ctx.font = "30px Arial";
+    ctx.fillText("+1", this.x, this.y);
   }
 
   // 每一帧更新子弹位置
@@ -35,6 +37,6 @@ export default class Ones extends Sprite {
     this.y -= this[__.speed]
 
     // 超出屏幕外回收自身
-    if (this.y < -this.height) databus.removeBullets(this)
+    if (this.y < -this.height) databus.removeOnes(this)
   }
 }

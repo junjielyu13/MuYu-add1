@@ -20,6 +20,7 @@ export default class DataBus {
     this.frame = 0
     this.score = 0
     this.bullets = []
+    this.ones = []
     this.enemys = []
     this.animations = []
     this.gameOver = false
@@ -47,5 +48,14 @@ export default class DataBus {
     temp.visible = false
 
     this.pool.recover('bullet', bullet)
+  }
+
+
+  removeOnes(one) {
+    const temp = this.ones.shift()
+
+    temp.visible = false
+
+    this.pool.recover('one', one)
   }
 }

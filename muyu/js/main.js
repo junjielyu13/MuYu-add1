@@ -51,48 +51,48 @@ export default class Main {
     )
   }
 
-  /**
-   * 随着帧数变化的敌机生成逻辑
-   * 帧数取模定义成生成的频率
-   */
-  enemyGenerate() {
-    if (databus.frame % 30 === 0) {
-      const enemy = databus.pool.getItemByClass('enemy', Enemy)
-      enemy.init(6)
-      databus.enemys.push(enemy)
-    }
-  }
+  // /**
+  //  * 随着帧数变化的敌机生成逻辑
+  //  * 帧数取模定义成生成的频率
+  //  */
+  // enemyGenerate() {
+  //   if (databus.frame % 30 === 0) {
+  //     const enemy = databus.pool.getItemByClass('enemy', Enemy)
+  //     enemy.init(6)
+  //     databus.enemys.push(enemy)
+  //   }
+  // }
 
-  // 全局碰撞检测
-  collisionDetection() {
-    const that = this
+  // // 全局碰撞检测
+  // collisionDetection() {
+  //   const that = this
 
-    databus.bullets.forEach((bullet) => {
-      for (let i = 0, il = databus.enemys.length; i < il; i++) {
-        const enemy = databus.enemys[i]
+  //   databus.bullets.forEach((bullet) => {
+  //     for (let i = 0, il = databus.enemys.length; i < il; i++) {
+  //       const enemy = databus.enemys[i]
 
-        if (!enemy.isPlaying && enemy.isCollideWith(bullet)) {
-          enemy.playAnimation()
-          that.music.playExplosion()
+  //       if (!enemy.isPlaying && enemy.isCollideWith(bullet)) {
+  //         enemy.playAnimation()
+  //         that.music.playExplosion()
 
-          bullet.visible = false
-          databus.score += 1
+  //         bullet.visible = false
+  //         databus.score += 1
 
-          break
-        }
-      }
-    })
+  //         break
+  //       }
+  //     }
+  //   })
 
-    for (let i = 0, il = databus.enemys.length; i < il; i++) {
-      const enemy = databus.enemys[i]
+  //   for (let i = 0, il = databus.enemys.length; i < il; i++) {
+  //     const enemy = databus.enemys[i]
 
-      if (this.muyu.isCollideWith(enemy)) {
-        databus.gameOver = true
+  //     if (this.muyu.isCollideWith(enemy)) {
+  //       databus.gameOver = true
 
-        break
-      }
-    }
-  }
+  //       break
+  //     }
+  //   }
+  // }
 
   // 游戏结束后的触摸事件处理逻辑
   touchEventHandler(e) {
@@ -120,6 +120,13 @@ export default class Main {
 
     databus.bullets
       .concat(databus.enemys)
+      .forEach((item) => {
+        item.drawToCanvas(ctx)
+      })
+
+
+      databus.ones
+      .concat(databus.ones)
       .forEach((item) => {
         item.drawToCanvas(ctx)
       })
@@ -152,8 +159,14 @@ export default class Main {
     if (databus.gameOver) return
 
 
-    databus.bullets
-      .concat(databus.enemys)
+    // databus.bullets
+    //   .concat(databus.enemys)
+    //   .forEach((item) => {
+    //     item.update()
+    //   })
+
+
+    databus.ones
       .forEach((item) => {
         item.update()
       })
@@ -164,7 +177,7 @@ export default class Main {
 
     if (databus.frame % 20 === 0) {
       // this.muyu.shoot()
-      this.music.playShoot()
+      // this.music.playShoot()
     }
   }
 

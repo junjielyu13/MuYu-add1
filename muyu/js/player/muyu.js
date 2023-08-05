@@ -1,5 +1,6 @@
 import Sprite from '../base/sprite'
 import Bullet from './bullet'
+import One from './one'
 import DataBus from '../databus'
 
 const screenWidth = window.innerWidth
@@ -41,13 +42,16 @@ export default class Muyu extends Sprite {
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
       e.preventDefault()
-      
+
       const x = e.touches[0].clientX
       const y = e.touches[0].clientY
       if (this.checkIsFingerOnMuyu(x, y)) {
         this.touched = true;
         this.width = 150;
         this.height = 150;
+        this.x -= 25;
+        this.y -= 25;
+        this.addOne();
       }
     }))
 
@@ -60,22 +64,20 @@ export default class Muyu extends Sprite {
       this.touched = false;
       this.width = 125;
       this.height = 125;
+      this.x += 25;
+      this.y += 25;
     }))
   }
 
-  /**
-   * 玩家射击操作
-   * 射击时机由外部决定
-   */
-  shoot() {
-    const bullet = databus.pool.getItemByClass('bullet', Bullet)
+  addOne() {
+    const one = databus.pool.getItemByClass('ones', One)
 
-    bullet.init(
-      this.x + this.width / 2 - bullet.width / 2,
+    one.init(
+      this.x + this.width / 2 - one.width / 2,
       this.y - 10,
       10
     )
 
-    databus.bullets.push(bullet)
+    databus.ones.push(one)
   }
 }
