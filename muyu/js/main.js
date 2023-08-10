@@ -29,13 +29,11 @@ export default class Main {
       this.touchHandler
     )
 
-    
     this.bg = new BackGround(ctx)
 
-    //this.muyu = new MUYU(ctx);
     //this.player = new Player(ctx)
     this.muyu = new Muyu(ctx)
-    //this.fz = new Fz(ctx)
+    this.fz = new Fz(ctx)
     this.gameinfo = new GameInfo()
     //this.music = new Music()
 
@@ -132,7 +130,7 @@ export default class Main {
       })
 
     this.muyu.drawToCanvas(ctx)
-    //this.fz.drawToCanvas(ctx)
+    this.fz.drawToCanvas(ctx)
 
     databus.animations.forEach((ani) => {
       if (ani.isPlaying) {

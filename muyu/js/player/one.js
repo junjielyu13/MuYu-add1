@@ -1,5 +1,6 @@
 import Sprite from '../base/sprite'
 import DataBus from '../databus'
+import Music from '../runtime/music'
 
 
 const ONES_WIDTH = 20

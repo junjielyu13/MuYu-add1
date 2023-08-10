@@ -1,14 +1,13 @@
 import Sprite from '../base/sprite'
-import Bullet from './bullet'
+import One from './one'
 import DataBus from '../databus'
+import Music from '../runtime/music'
 
-const screenWidth = window.innerWidth
-const screenHeight = window.innerHeight
-
-// 玩家相关常量设置
-const PLAYER_IMG_SRC = 'img/fz_din_ps.png'
-const PLAYER_WIDTH = 40
-const PLAYER_HEIGHT = 200
+const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
+const PLAYER_IMG_SRC = 'img/fz_cont_ps.png';
+const PLAYER_WIDTH = 70;
+const PLAYER_HEIGHT = 250;
 
 const databus = new DataBus()
 
@@ -16,45 +15,32 @@ export default class Fz extends Sprite {
   constructor() {
     super(PLAYER_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
 
-    // 玩家默认处于屏幕底部居中位置
-    this.x = screenWidth / 2 - this.width / 2
-    this.y = screenHeight - 300
+    this.x = screenWidth / 2 - this.width / 2;
+    this.y = 60;
+    this.top = 0;
 
-    // 用于在手指移动的时候标识手指是否已经在飞机上了
     this.touched = false
+    this.startTouchX = null;
+    this.startTouchY = null;
+    this.distance = null;
+    this.music = new Music();
 
-    this.bullets = []
-
-    // 初始化事件监听
     this.initEvent()
   }
 
-  /**
-   * 当手指触摸屏幕的时候
-   * 判断手指是否在飞机上
-   * @param {Number} x: 手指的X轴坐标
-   * @param {Number} y: 手指的Y轴坐标
-   * @return {Boolean}: 用于标识手指是否在飞机上的布尔值
-   */
-  checkIsFingerOnAir(x, y) {
+  checkIsFingerOnFz(x, y) {
     const deviation = 30
-
     return !!(x >= this.x - deviation
               && y >= this.y - deviation
               && x <= this.x + this.width + deviation
               && y <= this.y + this.height + deviation)
   }
 
-  /**
-   * 根据手指的位置设置飞机的位置
-   * 保证手指处于飞机中间
-   * 同时限定飞机的活动范围限制在屏幕中
-   */
   setAirPosAcrossFingerPosZ(x, y) {
     let disX = x - this.width / 2
     let disY = y - this.height / 2
 
-    if (disX < 0) disX = 0
+    if (disX < 0)disX = 0
 
     else if (disX > screenWidth - this.width) disX = screenWidth - this.width
 
@@ -66,54 +52,88 @@ export default class Fz extends Sprite {
     this.y = disY
   }
 
-  /**
-   * 玩家响应手指的触摸事件
-   * 改变战机的位置
-   */
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
       e.preventDefault()
 
-      const x = e.touches[0].clientX
-      const y = e.touches[0].clientY
+      this.startTouchX = e.touches[0].clientX;
+      this.startTouchY = e.touches[0].clientY;
 
-      //
-      if (this.checkIsFingerOnAir(x, y)) {
+      if (this.checkIsFingerOnFz( this.startTouchX, this.startTouchY)) {
         this.touched = true
-
-        this.setAirPosAcrossFingerPosZ(x, y)
+        this.addOne();
       }
     }))
 
     canvas.addEventListener('touchmove', ((e) => {
       e.preventDefault()
 
-      const x = e.touches[0].clientX
-      const y = e.touches[0].clientY
+      if (this.touched){
+        // this.setAirPosAcrossFingerPosZ(x, y)
 
-      if (this.touched) this.setAirPosAcrossFingerPosZ(x, y)
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+
+        // Calculate the distance moved
+        const deltaX = currentX - this.startTouchX;
+        const deltaY = currentY - this.startTouchY;
+        this.distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        //console.log('Moved distance X:', deltaX);
+        console.log('Moved distance Y:', deltaY);
+
+
+        // Update the startTouchX and startTouchY for the next move event
+        this.startTouchX = currentX;
+        this.startTouchY = currentY;
+      } 
     }))
 
     canvas.addEventListener('touchend', ((e) => {
       e.preventDefault()
 
       this.touched = false
+
+
     }))
   }
 
-  /**
-   * 玩家射击操作
-   * 射击时机由外部决定
-   */
-  shoot() {
-    const bullet = databus.pool.getItemByClass('bullet', Bullet)
-
-    bullet.init(
-      this.x + this.width / 2 - bullet.width / 2,
-      this.y - 10,
-      10
-    )
-
-    databus.bullets.push(bullet)
+  addOne() {
+    const one = databus.pool.getItemByClass('ones', One);
+    const oneX = getRandomInt(this.x, this.x + this.width);
+    
+    one.init(oneX, this.y - 10, 5);
+    databus.score += 1;
+    this.music.playFz();
+    databus.ones.push(one);
   }
+
+  // render(ctx) {
+  //   ctx.drawImage(
+  //     PLAYER_IMG_SRC,
+  //     0,
+  //     0,
+  //     this.width,
+  //     this.height,
+  //     0,
+  //     -screenHeight + this.top,
+  //     screenWidth,
+  //     screenHeight
+  //   )
+
+  //   ctx.drawImage(
+  //     PLAYER_IMG_SRC,
+  //     0,
+  //     0,
+  //     this.width,
+  //     this.height,
+  //     0,
+  //     this.top,
+  //     screenWidth,
+  //     screenHeight
+  //   )
+  // }
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
