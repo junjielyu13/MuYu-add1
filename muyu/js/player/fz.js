@@ -36,21 +36,6 @@ export default class Fz extends Sprite {
               && y <= this.y + this.height + deviation)
   }
 
-  setAirPosAcrossFingerPosZ(x, y) {
-    let disX = x - this.width / 2
-    let disY = y - this.height / 2
-
-    if (disX < 0)disX = 0
-
-    else if (disX > screenWidth - this.width) disX = screenWidth - this.width
-
-    if (disY <= 0) disY = 0
-
-    else if (disY > screenHeight - this.height) disY = screenHeight - this.height
-
-    this.x = disX
-    this.y = disY
-  }
 
   initEvent() {
     canvas.addEventListener('touchstart', ((e) => {
