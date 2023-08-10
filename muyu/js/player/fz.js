@@ -62,9 +62,10 @@ export default class Fz extends Sprite {
         // Calculate the distance moved
         const deltaX = currentX - this.startTouchX;
         const deltaY = currentY - this.startTouchY;
-        this.distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        this.distance = deltaY;
+        //Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         //console.log('Moved distance X:', deltaX);
-        console.log('Moved distance Y:', deltaY);
+        //console.log('Moved distance Y:', deltaY);
 
 
         // Update the startTouchX and startTouchY for the next move event
@@ -92,31 +93,33 @@ export default class Fz extends Sprite {
     databus.ones.push(one);
   }
 
-  // render(ctx) {
-  //   ctx.drawImage(
-  //     PLAYER_IMG_SRC,
-  //     0,
-  //     0,
-  //     this.width,
-  //     this.height,
-  //     0,
-  //     -screenHeight + this.top,
-  //     screenWidth,
-  //     screenHeight
-  //   )
+  render(ctx) {
+    ctx.drawImage(
+      PLAYER_IMG_SRC,
+      0,
+      0,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT,
+      this.x,
+      this.y,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT,
+    )
 
-  //   ctx.drawImage(
-  //     PLAYER_IMG_SRC,
-  //     0,
-  //     0,
-  //     this.width,
-  //     this.height,
-  //     0,
-  //     this.top,
-  //     screenWidth,
-  //     screenHeight
-  //   )
-  // }
+    console.log(this.y += this.distance,);
+
+    ctx.drawImage(
+      PLAYER_IMG_SRC,
+      0,
+      0,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT,
+      this.x,
+      this.y -= this.distance,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT,
+    )
+  }
 }
 
 function getRandomInt(min, max) {
