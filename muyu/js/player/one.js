@@ -32,11 +32,10 @@ export default class One extends Sprite {
     ctx.fillText("+1", this.x, this.y);
   }
 
-  // 每一帧更新子弹位置
+
   update() {
     this.y -= this[__.speed]
 
-    // 超出屏幕外回收自身
-    if (this.y < -this.height) databus.removeOnes(this)
+    if (this.y < -this.height - 200) databus.removeOnes(this)
   }
 }

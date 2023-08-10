@@ -1,33 +1,25 @@
 import Sprite from '../base/sprite'
-import Bullet from './bullet'
 import One from './one'
 import DataBus from '../databus'
+import Music from '../runtime/music'
 
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
-
-// 玩家相关常量设置
 const PLAYER_IMG_SRC = 'img/muyu_ps.png'
 const PLAYER_WIDTH = 125
 const PLAYER_HEIGHT = 125
-
 const databus = new DataBus()
 
 export default class Muyu extends Sprite {
   constructor() {
     super(PLAYER_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
 
-    // 玩家默认处于屏幕底部居中位置
-    this.x = screenWidth / 2 - this.width / 2
-    this.y = screenHeight - this.height - 30
+    this.x = screenWidth / 2 - this.width / 2;
+    this.y = screenHeight - this.height - 30;
 
-    // 用于在手指移动的时候标识手指是否已经在飞机上了
-    this.touched = false
-
-    this.bullets = []
-
-    // 初始化事件监听
-    this.initEvent()
+    this.touched = false;
+    this.music = new Music();
+    this.initEvent();
   }
 
   checkIsFingerOnMuyu(x, y) {
@@ -61,23 +53,28 @@ export default class Muyu extends Sprite {
 
     canvas.addEventListener('touchend', ((e) => {
       e.preventDefault()
-      this.touched = false;
-      this.width = 125;
-      this.height = 125;
-      this.x += 25;
-      this.y += 25;
+
+      if (this.touched) {
+        this.touched = false;
+        this.width = 125;
+        this.height = 125;
+        this.x += 25;
+        this.y += 25;
+      }
     }))
   }
 
   addOne() {
-    const one = databus.pool.getItemByClass('ones', One)
-
-    one.init(
-      this.x + this.width / 2 - one.width / 2,
-      this.y - 10,
-      10
-    )
-
-    databus.ones.push(one)
+    const one = databus.pool.getItemByClass('ones', One);
+    const oneX = getRandomInt(this.x, this.x + this.width);
+    
+    one.init(oneX, this.y - 10, 5);
+    databus.score += 1;
+    this.music.playMuyu();
+    databus.ones.push(one);
   }
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

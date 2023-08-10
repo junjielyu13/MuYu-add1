@@ -37,7 +37,7 @@ export default class Main {
     this.muyu = new Muyu(ctx)
     //this.fz = new Fz(ctx)
     this.gameinfo = new GameInfo()
-    this.music = new Music()
+    //this.music = new Music()
 
     this.bindLoop = this.loop.bind(this)
     this.hasEventBind = false
@@ -125,7 +125,7 @@ export default class Main {
       })
 
 
-      databus.ones
+    databus.ones
       .concat(databus.ones)
       .forEach((item) => {
         item.drawToCanvas(ctx)
