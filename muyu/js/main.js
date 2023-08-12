@@ -30,12 +30,9 @@ export default class Main {
     )
 
     this.bg = new BackGround(ctx)
-
-    //this.player = new Player(ctx)
     this.muyu = new Muyu(ctx)
     this.fz = new Fz(ctx)
     this.gameinfo = new GameInfo()
-    //this.music = new Music()
 
     this.bindLoop = this.loop.bind(this)
     this.hasEventBind = false
@@ -115,12 +112,13 @@ export default class Main {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     this.bg.render(ctx)
+    //this.fz.render(ctx)
 
-    databus.bullets
-      .concat(databus.enemys)
-      .forEach((item) => {
-        item.drawToCanvas(ctx)
-      })
+    // databus.bullets
+    //   .concat(databus.enemys)
+    //   .forEach((item) => {
+    //     item.drawToCanvas(ctx)
+    //   })
 
 
     databus.ones
@@ -129,8 +127,8 @@ export default class Main {
         item.drawToCanvas(ctx)
       })
 
-    this.muyu.drawToCanvas(ctx)
     this.fz.drawToCanvas(ctx)
+    this.muyu.drawToCanvas(ctx)
 
     databus.animations.forEach((ani) => {
       if (ani.isPlaying) {

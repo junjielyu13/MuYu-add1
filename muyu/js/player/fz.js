@@ -5,9 +5,9 @@ import Music from '../runtime/music'
 
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
-const PLAYER_IMG_SRC = 'img/fz_cont_ps.png';
+const PLAYER_IMG_SRC = 'img/fz_din_ps.png';
 const PLAYER_WIDTH = 70;
-const PLAYER_HEIGHT = 250;
+const PLAYER_HEIGHT = 270;
 
 const databus = new DataBus()
 
@@ -25,6 +25,7 @@ export default class Fz extends Sprite {
     this.distance = null;
     this.music = new Music();
 
+    //this.render(ctx)
     this.initEvent()
   }
 
@@ -93,31 +94,35 @@ export default class Fz extends Sprite {
     databus.ones.push(one);
   }
 
-  render(ctx) {
+  drawToCanvas(ctx) {
+
+    //console.log(this.distance);
+
     ctx.drawImage(
-      PLAYER_IMG_SRC,
+      this.img,
       0,
-      0,
-      PLAYER_WIDTH,
-      PLAYER_HEIGHT,
+      226,
+      this.img.width, 
+      this.img.height,
       this.x,
-      this.y,
-      PLAYER_WIDTH,
-      PLAYER_HEIGHT,
+      this.y - 226,
+      this.width,
+      this.height
     )
 
-    console.log(this.y += this.distance,);
+    var x = this.y + this.distance;
+    //console.log(x);
 
     ctx.drawImage(
-      PLAYER_IMG_SRC,
+      this.img,
       0,
       0,
-      PLAYER_WIDTH,
-      PLAYER_HEIGHT,
+      this.img.width, 
+      this.img.height,
       this.x,
-      this.y -= this.distance,
-      PLAYER_WIDTH,
-      PLAYER_HEIGHT,
+      this.y,
+      this.width,
+      this.height
     )
   }
 }
