@@ -23,9 +23,9 @@ export default class Fz extends Sprite {
     this.startTouchX = null;
     this.startTouchY = null;
     this.distance = null;
+    this.moveShift = null;
     this.music = new Music();
 
-    //this.render(ctx)
     this.initEvent()
   }
 
@@ -55,21 +55,18 @@ export default class Fz extends Sprite {
       e.preventDefault()
 
       if (this.touched){
-        // this.setAirPosAcrossFingerPosZ(x, y)
-
         const currentX = e.touches[0].clientX;
         const currentY = e.touches[0].clientY;
 
-        // Calculate the distance moved
         const deltaX = currentX - this.startTouchX;
         const deltaY = currentY - this.startTouchY;
+
         this.distance = deltaY;
-        //Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        //console.log('Moved distance X:', deltaX);
-        //console.log('Moved distance Y:', deltaY);
+        this.moveShift += this.distance;
+        if(Math.abs(this.moveShift) > this.width){
+          this.moveShift = 0;
+        }
 
-
-        // Update the startTouchX and startTouchY for the next move event
         this.startTouchX = currentX;
         this.startTouchY = currentY;
       } 
@@ -79,8 +76,6 @@ export default class Fz extends Sprite {
       e.preventDefault()
 
       this.touched = false
-
-
     }))
   }
 
@@ -96,38 +91,29 @@ export default class Fz extends Sprite {
 
   drawToCanvas(ctx) {
 
-    //console.log(this.distance);
-
-
-    console.log(this.y - 230 + this.distance);
-
-
     ctx.drawImage(
       this.img,
       0,
-      226,
-      this.img.width, 
+      0,
+      this.img.width,
       this.img.height,
       this.x,
-      this.y - 230 + this.distance,
+      this.y + this.moveShift,
       this.width,
       this.height
-    )
-
-    var x = this.distance;
-    //console.log(x);
+    );
 
     ctx.drawImage(
       this.img,
       0,
       0,
-      this.img.width, 
+      this.img.width,
       this.img.height,
       this.x,
-      this.y + this.distance,
+      this.y - 2 + this.moveShift - this.height,
       this.width,
       this.height
-    )
+    );
   }
 }
 
