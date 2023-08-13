@@ -69,11 +69,11 @@ export default class Muyu extends Sprite {
 
     var oneX = 0;
     if (getRandomInt(0,1)) {
-      oneX = getRandomInt(0, screenWidth / 2 - 60);
+      oneX = getRandomInt(0, screenWidth / 2 - 80);
     }else{
       oneX = getRandomInt(screenWidth / 2 + 35, screenWidth-20);
     }
-    
+
     one.init(oneX, this.y, 5);
     databus.score += 1;
     this.music.playMuyu();
