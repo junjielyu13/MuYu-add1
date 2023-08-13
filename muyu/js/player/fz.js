@@ -2,18 +2,23 @@ import Sprite from '../base/sprite'
 import One from './one'
 import DataBus from '../databus'
 import Music from '../runtime/music'
+import {
+  FZ_HIGHT, 
+  FZ_WIDTH, 
+  FZ_IMG, 
+  FONT_SIZE,
+  ONE_SPEED,
+  getRandomInt
+} from '../config/config';
 
 const screenWidth = window.innerWidth;
 const screenHeight = window.innerHeight;
-const PLAYER_IMG_SRC = 'img/fz_din_ps.png';
-const PLAYER_WIDTH = 70;
-const PLAYER_HEIGHT = 270;
 
 const databus = new DataBus()
 
 export default class Fz extends Sprite {
   constructor() {
-    super(PLAYER_IMG_SRC, PLAYER_WIDTH, PLAYER_HEIGHT)
+    super(FZ_IMG,  FZ_WIDTH, FZ_HIGHT)
 
     this.x = screenWidth / 2 - this.width / 2;
     this.y = 60;
@@ -84,14 +89,14 @@ export default class Fz extends Sprite {
 
     var oneX = 0;
     if (getRandomInt(0,1)) {
-      oneX = getRandomInt(0, screenWidth / 2 - 60);
+      oneX = getRandomInt(0, screenWidth / 2 - this.width / 2 - FONT_SIZE);
     }else{
-      oneX = getRandomInt(screenWidth / 2 + 35, screenWidth-20);
+      oneX = getRandomInt(screenWidth / 2 + this.width / 2, screenWidth - FONT_SIZE);
     }
     
     const oneY =  this.y + this.height + this.distance;
 
-    one.init(oneX, oneY, 5);
+    one.init(oneX, oneY, ONE_SPEED);
     databus.score += 1;
     this.music.playFz();
     databus.ones.push(one);
@@ -123,8 +128,4 @@ export default class Fz extends Sprite {
       this.height
     );
   }
-}
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

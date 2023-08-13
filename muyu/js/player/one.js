@@ -1,10 +1,6 @@
 import Sprite from '../base/sprite'
 import DataBus from '../databus'
-import Music from '../runtime/music'
-
-
-const ONES_WIDTH = 20
-const ONES_HEIGHT = 20
+import {ONES_WIDTH, ONES_HEIGHT, FONT_SIZE} from '../config/config'
 
 const __ = {
   speed: Symbol('speed')
@@ -29,7 +25,7 @@ export default class One extends Sprite {
 
   drawToCanvas(ctx){
     if (!this.visible) return
-    ctx.font = "30px Arial";
+    ctx.font = FONT_SIZE + "px Arial";
     ctx.fillText("+1", this.x, this.y);
   }
 
