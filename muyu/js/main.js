@@ -41,8 +41,7 @@ export default class Main {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     this.bg.render(ctx)
-    //this.fz.render(ctx)
-
+    
     databus.ones
       .concat(databus.ones)
       .forEach((item) => {
