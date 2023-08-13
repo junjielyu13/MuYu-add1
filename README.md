@@ -9,7 +9,7 @@
 
 <div align="center">
 
-![weq](/figures/Logotip_UB.svg.png)
+![weq]()
 
 </div>
 
