@@ -6,10 +6,10 @@ export default class Music {
     instance = this
     
     this.muyuAudio = new Audio()
-    this.muyuAudio.src = 'music/muyu.mp3'
+    this.muyuAudio.src = 'audio/muyu.mp3'
 
     this.fzAudio = new Audio()
-    this.fzAudio.src = 'music/fz.wav'
+    this.fzAudio.src = 'audio/fz.wav'
   }
 
   playMuyu(){

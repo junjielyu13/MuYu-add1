@@ -8,15 +8,12 @@ let instance
 export default class DataBus {
   constructor() {
     if (instance) return instance
-
     instance = this
-
     this.pool = new Pool()
-
-    this.reset()
+    this.init()
   }
 
-  reset() {
+  init() {
     this.frame = 0
     this.score = 0
     this.bullets = []
@@ -26,36 +23,9 @@ export default class DataBus {
     this.gameOver = false
   }
 
-  /**
-   * 回收敌人，进入对象池
-   * 此后不进入帧循环
-   */
-  removeEnemey(enemy) {
-    const temp = this.enemys.shift()
-
-    temp.visible = false
-
-    this.pool.recover('enemy', enemy)
-  }
-
-  /**
-   * 回收子弹，进入对象池
-   * 此后不进入帧循环
-   */
-  removeBullets(bullet) {
-    const temp = this.bullets.shift()
-
-    temp.visible = false
-
-    this.pool.recover('bullet', bullet)
-  }
-
-
   removeOnes(one) {
     const temp = this.ones.shift()
-
     temp.visible = false
-
     this.pool.recover('one', one)
   }
 }

@@ -98,6 +98,10 @@ export default class Fz extends Sprite {
 
     //console.log(this.distance);
 
+
+    console.log(this.y - 230 + this.distance);
+
+
     ctx.drawImage(
       this.img,
       0,
@@ -105,12 +109,12 @@ export default class Fz extends Sprite {
       this.img.width, 
       this.img.height,
       this.x,
-      this.y - 226,
+      this.y - 230 + this.distance,
       this.width,
       this.height
     )
 
-    var x = this.y + this.distance;
+    var x = this.distance;
     //console.log(x);
 
     ctx.drawImage(
@@ -120,7 +124,7 @@ export default class Fz extends Sprite {
       this.img.width, 
       this.img.height,
       this.x,
-      this.y,
+      this.y + this.distance,
       this.width,
       this.height
     )
