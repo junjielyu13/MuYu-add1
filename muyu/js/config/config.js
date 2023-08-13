@@ -16,8 +16,3 @@ exports.FONT_SIZE = 30;
 exports.ONE_SPEED = 5;
 exports.ONES_WIDTH = 20;
 exports.ONES_HEIGHT = 20;
-
-
-export function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}

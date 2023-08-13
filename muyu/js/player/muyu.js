@@ -9,9 +9,9 @@ import {
   MUYU_SCALE_SIZE, 
   FZ_WIDTH, 
   FONT_SIZE, 
-  ONE_SPEED,
-  getRandomInt
+  ONE_SPEED
 } from '../config/config';
+import {getRandomInt} from '../libs/utils';
 
 const screenWidth = window.innerWidth
 const screenHeight = window.innerHeight
