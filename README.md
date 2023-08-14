@@ -2,18 +2,17 @@
 
 <div align="center">
 
-<!-- [![Generic badge](https://img.shields.io/badge/Java-1.8-<COLOR>.svg)](https://shields.io/)
-[![Generic badge](https://img.shields.io/badge/Test-Junit-black.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/Logger-Util.logger-black.svg)](https://shields.io/) [![made-with-ub](https://img.shields.io/badge/Made%20with-UB-1f425f.svg)](https://web.ub.edu/es/) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](#license) [![GitHub contributors](https://badgen.net/github/contributors/Naereen/Strapdown.js)](#contributing) -->
-
 </div>
 
 <div align="center">
 
-![weq]()
+Mokugyo WeChat mini game program
+
+![cover](.etc/cover.png) ![cover](.etc/cover2.png)
 
 </div>
 
-Here is an [example]().
+Here is an [example](https://xn--4pv000j.online/).
 
 ## Table of Contents
 
@@ -29,31 +28,35 @@ Here is an [example]().
 
 ## Requirements
 
--
-
--
+- WeChat Mini Program Developer Tools, --> [guide](https://developers.weixin.qq.com/minigame/dev/guide/).
 
 ## Install
 
 Clone to local directory:
 
-`$ git clone `
-
-Or with **curl/wget**:
-
-`$ curl -O `
-
-`$ wget`
+`$ git clone https://github.com/junjielyu13/MuYu-add1.git`
 
 ## Usage
 
+- Use the WeChat applet developer tool to open the [muyu](https://github.com/junjielyu13/MuYu-add1/tree/main/muyu) folder
+
+- Compile with WeChat Mini Program Developer Tools
+
 ## Steps to Run
 
-1.
-2.
-3. The Last, **Enjoy your game**.
+1. Use WeChat Mini Program Developer Tools to Play Games
+2. Or use the WeChat applet developer tool to compile it into the mobile phone to play the game
 
 ## How to play
+
+`"Click the Wooden fish or move the **Buddhist beads to accumulate merit for yourself!"` 
+
+
+<div align="center">
+
+![gif](.etc/gif.gif)
+
+</div>
 
 ## Documentation
 
