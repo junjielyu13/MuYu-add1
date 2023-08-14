@@ -60,7 +60,7 @@ Clone to local directory:
 
 ## Documentation
 
-more documentation [here]().
+more documentation [here](https://developers.weixin.qq.com/minigame/dev/guide/).
 
 ## License
 
