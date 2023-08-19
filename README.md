@@ -44,8 +44,8 @@ Clone to local directory:
 
 ## Steps to Run
 
-1. Use WeChat Mini Program Developer Tools to Play Games
-2. Or use the WeChat applet developer tool to compile it into the mobile phone to play the game
+1. Use WeChat Mini Program Developer Tools to Play Games.
+2. Or use the WeChat applet developer tool to compile it into the mobile phone to play the game.
 
 ## How to play
 
